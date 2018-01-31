@@ -6,7 +6,11 @@ path="res://.import/Oscuridad.png-14f0240e04ef5ab8fcd138046e9bb9e5.stex"
 
 [deps]
 
+source_file="res://Efectos/Oscuridad.png"
 source_md5="03d1ad99a156cffc4b81849dd2baad97"
+
+dest_files=[ "res://.import/Oscuridad.png-14f0240e04ef5ab8fcd138046e9bb9e5.stex" ]
+dest_md5="004579e61c9618de444399c88e983964"
 
 [params]
 

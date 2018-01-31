@@ -6,7 +6,11 @@ path="res://.import/Luz.png-378d9f6b1569b3969f0f8f84817ef073.stex"
 
 [deps]
 
+source_file="res://Efectos/Luz.png"
 source_md5="03d1ad99a156cffc4b81849dd2baad97"
+
+dest_files=[ "res://.import/Luz.png-378d9f6b1569b3969f0f8f84817ef073.stex" ]
+dest_md5="004579e61c9618de444399c88e983964"
 
 [params]
 

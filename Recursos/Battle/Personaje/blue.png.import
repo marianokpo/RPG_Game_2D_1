@@ -2,11 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blue.png-b81a3d5b9c519458de2abefa00351840.stex"
+path="res://.import/blue.png-4f7064bad72ec54b1d7abcb292ca848a.stex"
 
 [deps]
 
+source_file="res://Recursos/Battle/Personaje/blue.png"
 source_md5="0443d6810efff8193ec2582066169c7a"
+
+dest_files=[ "res://.import/blue.png-4f7064bad72ec54b1d7abcb292ca848a.stex" ]
+dest_md5="43ac79920e2f7ff6a18874bb6a2a0047"
 
 [params]
 

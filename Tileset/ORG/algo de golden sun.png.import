@@ -6,7 +6,11 @@ path="res://.import/algo de golden sun.png-926abc6191deee4727f9a6f8bc45cc1b.stex
 
 [deps]
 
+source_file="res://Tileset/ORG/algo de golden sun.png"
 source_md5="b1b046ae9bf2764fca9a15c1980b1f09"
+
+dest_files=[ "res://.import/algo de golden sun.png-926abc6191deee4727f9a6f8bc45cc1b.stex" ]
+dest_md5="919e365c9b7b9bad89031bcea7ba81de"
 
 [params]
 

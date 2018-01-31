@@ -6,7 +6,11 @@ path="res://.import/char_safi_02.png-d7d18537f31bf79bc41670feada6c16e.stex"
 
 [deps]
 
+source_file="res://Recursos/Personajes/char_safi_02.png"
 source_md5="c620788ece88fa61f0a6dedccd41d8b3"
+
+dest_files=[ "res://.import/char_safi_02.png-d7d18537f31bf79bc41670feada6c16e.stex" ]
+dest_md5="f7d447c2f983970a935ef6444327c2a5"
 
 [params]
 

@@ -6,7 +6,11 @@ path="res://.import/parts-873.png-d7f5328bb76e5928e56e0fed14d801ff.stex"
 
 [deps]
 
+source_file="res://Tileset/parts-873.png"
 source_md5="80790b7f8ce7e2983bce0e683167d978"
+
+dest_files=[ "res://.import/parts-873.png-d7f5328bb76e5928e56e0fed14d801ff.stex" ]
+dest_md5="4753084547bc9d8d085d0ac67f29c2fc"
 
 [params]
 

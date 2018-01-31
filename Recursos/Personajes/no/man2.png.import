@@ -6,7 +6,11 @@ path="res://.import/man2.png-619467ded797fa083e74c4ede8b00fc6.stex"
 
 [deps]
 
+source_file="res://Recursos/Personajes/no/man2.png"
 source_md5="b0f0384067b70821f193c0f6f42478f2"
+
+dest_files=[ "res://.import/man2.png-619467ded797fa083e74c4ede8b00fc6.stex" ]
+dest_md5="3346306654432d291b201fb72fd89b2a"
 
 [params]
 
