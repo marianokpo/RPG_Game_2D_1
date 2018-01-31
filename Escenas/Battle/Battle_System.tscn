@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Escenas/Battle/Battle_System.gd" type="Script" id=1]
 [ext_resource path="res://Recursos/Battle/Fondo/Pasto1.jpg" type="Texture" id=2]
 [ext_resource path="res://Escenas/Battle/Entidades/arche.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Escenas/Battle/Entidades/Personaje.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Escenas/Battle/HUD_Battle.tscn" type="PackedScene" id=5]
 
 [node name="Battle_System" type="Node2D"]
 
@@ -24,9 +23,5 @@ scale = Vector2( 1.6051, 1.24741 )
 [node name="Personaje" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 184.843, 315.328 )
-
-[node name="HUD_Battle" parent="." index="3" instance=ExtResource( 5 )]
-
-position = Vector2( 55.6507, 530.006 )
 
 

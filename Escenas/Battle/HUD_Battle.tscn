@@ -1,6 +1,10 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="HUD_Battle" type="Node2D" index="0"]
+[ext_resource path="res://Escenas/Battle/HUD_Battle.gd" type="Script" id=1]
+
+[node name="HUD_Battle" type="Node2D"]
+
+script = ExtResource( 1 )
 
 [node name="Nombre" type="Label" parent="." index="0"]
 
@@ -75,7 +79,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
-_sections_unfolded = [ "Anchor" ]
+_sections_unfolded = [ "Anchor", "Margin" ]
 
 [node name="ColorRectVida" type="ColorRect" parent="." index="4"]
 
