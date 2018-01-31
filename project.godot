@@ -19,6 +19,10 @@ config/icon="res://icon.png"
 SingletonPersonaje="*res://Script/Personaje.gd"
 Singleton_Mapa="*res://Script/Singleton_Mapa.gd"
 
+[display]
+
+window/handheld/emulate_touchscreen=true
+
 [locale]
 
 locale_filter=[ 0, [ "es_AR" ] ]

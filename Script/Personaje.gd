@@ -4,11 +4,11 @@ var Nivel = 1
 var EXP = 0
 var EXPProx = 30
 
-var VidaMax = 500
-var Vida = 500
+var VidaMax = 50
+var Vida = 50
 
-var MagiaMax = 50
-var Magia = 50
+var MagiaMax = 10
+var Magia = 10
 
 var Fuerza = 5
 var Defensa = 3

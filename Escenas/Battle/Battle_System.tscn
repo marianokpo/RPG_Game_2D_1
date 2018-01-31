@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Escenas/Battle/Battle_System.gd" type="Script" id=1]
 [ext_resource path="res://Recursos/Battle/Fondo/Pasto1.jpg" type="Texture" id=2]
 [ext_resource path="res://Escenas/Battle/Entidades/arche.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Escenas/Battle/Entidades/Personaje.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Escenas/Battle/MenuBatalla.tscn" type="PackedScene" id=5]
 
-[node name="Battle_System" type="Node2D"]
+[node name="Battle_System" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -18,10 +19,14 @@ texture = ExtResource( 2 )
 [node name="arche" parent="." index="1" instance=ExtResource( 3 )]
 
 position = Vector2( 844.687, 300.915 )
-scale = Vector2( 1.6051, 1.24741 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Personaje" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 184.843, 315.328 )
+
+[node name="MenuBatalla" parent="." index="3" instance=ExtResource( 5 )]
+
+position = Vector2( 337.379, 419.067 )
 
 
