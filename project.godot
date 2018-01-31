@@ -1,0 +1,28 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=3
+
+[application]
+
+config/name="RPG 1 2D"
+run/main_scene="res://Escenas/Mapas/Mundo.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+SingletonPersonaje="*res://Script/Personaje.gd"
+Singleton_Mapa="*res://Script/Singleton_Mapa.gd"
+
+[locale]
+
+locale_filter=[ 0, [ "es_AR" ] ]
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

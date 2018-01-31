@@ -1,0 +1,216 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Tileset/Tileset1.tres" type="TileSet" id=1]
+[ext_resource path="res://Escenas/Entidades/Personaje/Personaje.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=5]
+
+script/source = "extends Node2D
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called every time the node is added to the scene.
+	# Initialization here
+	$Personaje.global_position.x = Singleton_Mapa.get_posTP_X()
+	$Personaje.global_position.y = Singleton_Mapa.get_posTP_Y()
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+"
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Area2D
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called every time the node is added to the scene.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_Area2D_body_entered( body ):
+	if body.is_in_group(\"PJ\"):
+		Singleton_Mapa.set_posTP(80.2,195.6)
+		get_tree().change_scene(\"res://Escenas/Mapas/Mundo.tscn\")
+		pass
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 30.1343, 29.7519 )
+
+[sub_resource type="GDScript" id=4]
+
+script/source = "extends Area2D
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called every time the node is added to the scene.
+	# Initialization here
+	pass
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+
+
+func _on_Area2D2_body_entered( body ):
+	if body.is_in_group(\"PJ\"):
+		Singleton_Mapa.set_posTP(80.2,130.6)
+		get_tree().change_scene(\"res://Escenas/Mapas/Mundo.tscn\")
+		pass
+"
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 46.734, 10 )
+
+[node name="Aldea_paso_1" type="Node2D"]
+
+script = SubResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="TileMap" type="TileMap" parent="." index="0"]
+
+editor/display_folded = true
+mode = 0
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( -524289, 2, 0, -589824, 2, 0, -589823, 2, 0, -458755, 2, 0, -458754, 2, 0, -458753, 2, 0, -524288, 2, 0, -524287, 2, 0, -524286, 2, 0, -524285, 2, 0, -393220, 2, 0, -393219, 2, 0, -393218, 2, 0, -393217, 2, 0, -458752, 2, 0, -458751, 2, 0, -458750, 2, 0, -458749, 2, 0, -458748, 2, 0, -327685, 2, 0, -327684, 2, 0, -327683, 2, 0, -327682, 2, 0, -327681, 2, 0, -393216, 2, 0, -393215, 2, 0, -393214, 2, 0, -393213, 2, 0, -393212, 2, 0, -393211, 2, 0, -262150, 2, 0, -262149, 2, 0, -262148, 2, 0, -262147, 2, 0, -262146, 2, 0, -262145, 2, 0, -327680, 2, 0, -327679, 2, 0, -327678, 2, 0, -327677, 2, 0, -327676, 2, 0, -327675, 2, 0, -327674, 2, 0, -196614, 2, 0, -196613, 2, 0, -196612, 2, 0, -196611, 2, 0, -196610, 2, 0, -196609, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 2, 0, -262140, 2, 0, -262139, 2, 0, -262138, 2, 0, -131078, 2, 0, -131077, 2, 0, -131076, 2, 0, -131075, 2, 0, -131074, 2, 0, -131073, 2, 0, -196608, 2, 0, -196607, 2, 0, -196606, 2, 0, -196605, 2, 0, -196604, 2, 0, -196603, 2, 0, -196602, 2, 0, -65542, 2, 0, -65541, 2, 0, -65540, 2, 0, -65539, 2, 0, -65538, 2, 0, -65537, 2, 0, -131072, 2, 0, -131071, 2, 0, -131070, 2, 0, -131069, 2, 0, -131068, 2, 0, -131067, 2, 0, -131066, 2, 0, -5, 2, 0, -4, 2, 0, -3, 2, 0, -2, 2, 0, -1, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, -65533, 2, 0, -65532, 2, 0, -65531, 2, 0, -65530, 2, 0, 65532, 2, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 131069, 2, 0, 131070, 2, 0, 131071, 2, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 65539, 2, 0, 65540, 2, 0, 196606, 2, 0, 196607, 2, 0, 131072, 2, 0, 131073, 2, 0, 131074, 2, 0, 131075, 2, 0, 196608, 2, 0, 196609, 2, 0, 196610, 2, 0 )
+_sections_unfolded = [ "Cell" ]
+
+[node name="Area2D" type="KinematicBody2D" parent="TileMap" index="0"]
+
+editor/display_folded = true
+input_pickable = true
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TileMap/Area2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -192.762, -160.405, -191.86, -32.2497, -158.467, -32.2497, -160.272, -3.36969, -127.782, 0.240326, -126.88, 31.8279, -95.2921, 31.8279, -96.1946, 63.4154, -60.0946, 63.4154, -62.8021, 95.0029, -0.529541, 95.0029, 1.27548, 127.493, 97.8431, 127.493, 94.2331, 95.9054, 124.918, 95.0029, 126.723, 64.3179, 159.213, 64.3179, 162.823, 29.1203, 193.508, 31.8279, 192.606, 0.240326, 221.486, -0.662201, 225.096, -159.502, 190.801, -163.112, 193.508, -189.285, 161.018, -192.895, 161.018, -222.677, 128.528, -225.385, 126.723, -255.167, 62.6455, -256.07, 64.4506, -284.95, -31.2146, -286.755, -31.2146, -258.777, -93.4871, -256.972, -95.2921, -225.385, -127.782, -223.58, -128.685, -191.992, -159.37, -191.992, -163.345, -192.686, -147.637, -296.682, 244.951, -291.267, 239.307, 133.81, -215.554, 132.908, -211.041, -212.75, -164.111, -200.115, -161.404, -160.405 )
+
+[node name="TileMap2" type="TileMap" parent="." index="1"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+
+[node name="TileMap3" type="TileMap" parent="." index="2"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+
+[node name="Area2D" type="Area2D" parent="." index="3"]
+
+editor/display_folded = true
+position = Vector2( 48.734, 112.111 )
+scale = Vector2( 1.45122, 0.401442 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="Personaje" parent="." index="4" instance=ExtResource( 2 )]
+
+position = Vector2( 48.7534, 68.6981 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Area2D2" type="Area2D" parent="." index="5"]
+
+editor/display_folded = true
+position = Vector2( 16.6205, -279.34 )
+scale = Vector2( 1, 0.650119 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
+
+position = Vector2( 2.21606, 13.6348 )
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]
+
+[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_Area2D2_body_entered"]
+
+
