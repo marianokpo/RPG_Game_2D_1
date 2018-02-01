@@ -180,6 +180,6 @@ blend_times = [  ]
 
 [node name="HUD_Battle" parent="." index="2" instance=ExtResource( 3 )]
 
-position = Vector2( -65.1371, 30.0633 )
+position = Vector2( -65.1371, 43.0633 )
 
 

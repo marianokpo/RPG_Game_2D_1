@@ -10,6 +10,10 @@ func _ready():
 
 	pass
 
+func set_name(var nam=""):
+	$Name2.text = nam
+	pass
+
 
 func _on_Atacar_pressed():
 	Boton = "ATACAR"

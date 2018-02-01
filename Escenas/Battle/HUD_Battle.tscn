@@ -83,7 +83,43 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="ColorRectFondo" type="ColorRect" parent="." index="4"]
+[node name="ColorRectFondo3" type="ColorRect" parent="." index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 135.0
+margin_bottom = -4.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 1 )
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="ColorRectTiempo" type="ColorRect" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 135.0
+margin_bottom = -4.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.0589914, 0.0409851, 0.617188, 1 )
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="ColorRectFondo" type="ColorRect" parent="." index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -101,7 +137,7 @@ size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="ColorRectVida" type="ColorRect" parent="." index="5"]
+[node name="ColorRectVida" type="ColorRect" parent="." index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -119,7 +155,7 @@ size_flags_vertical = 1
 color = Color( 0.617188, 0.0409851, 0.0409851, 1 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="PS_ENTIDAD" type="Label" parent="." index="6"]
+[node name="PS_ENTIDAD" type="Label" parent="." index="8"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -141,7 +177,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="ColorRectFondo2" type="ColorRect" parent="." index="7"]
+[node name="ColorRectFondo2" type="ColorRect" parent="." index="9"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -159,7 +195,7 @@ size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="ColorRectMagia" type="ColorRect" parent="." index="8"]
+[node name="ColorRectMagia" type="ColorRect" parent="." index="10"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -177,7 +213,7 @@ size_flags_vertical = 1
 color = Color( 0.0589914, 0.0409851, 0.617188, 1 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="MP_ENTIDAD" type="Label" parent="." index="9"]
+[node name="MP_ENTIDAD" type="Label" parent="." index="11"]
 
 anchor_left = 0.0
 anchor_top = 0.0

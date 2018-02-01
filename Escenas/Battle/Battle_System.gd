@@ -9,6 +9,10 @@ var Org_Mov = Vector2()
 
 var inicializado = false
 
+var Esperando = false
+
+var EntitiEspera = -1 ## 0,1,2 == player 3,4,5 == Enemy
+
 func _ready():
 	
 	pass
@@ -21,22 +25,7 @@ func _process(delta):
 		InicializarPJ()
 		InicializarEnemy()
 		inicializado=true
-		
-	##Ataq_Player()
-	if ( $MenuBatalla.get_boton() == "ATACAR" )||Input.is_action_just_pressed("ui_accept"):
-		$Personaje2.Ataq_Player($arche.global_position)
-		$MenuBatalla.visible = false
-		Ataq = true
-		pass
-	else:
-		if Ataq :
-			if(!$Personaje2.Ataq_Player($arche.global_position)):
-				$MenuBatalla.visible = true
-				Ataq = false
-				pass
-			pass
-	
-	
+	Esperas()
 	pass
 
 func InicializarPJ():
@@ -63,59 +52,123 @@ func InicializarPJ():
 	pass
 
 func InicializarEnemy():
-	var i = 0
+	var i = 2
 	var nameSprite = "arche"
-	$arche/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
-	$arche.global_position = Vector2(725,270)
-	$arche/HUD_Battle.set_name("arche")
+	$Enemigo1/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
+	$Enemigo1.global_position = Vector2(725,270)
+	$Enemigo1/HUD_Battle.set_name(nameSprite)
 	if( i >=1 ):
-		nameSprite = SingletonPersonaje.get_SpriteName(1)
-		$Personaje2/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
-		$Personaje2.global_position = Vector2(115,180)
-		$Personaje2.visible = true
-		$Personaje2/HUD_Battle.set_name(SingletonPersonaje.get_Name(1))
+		nameSprite = "Kratos"
+		$Enemigo2/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
+		$Enemigo2.global_position = Vector2(870,180)
+		$Enemigo2.visible = true
+		$Enemigo2/HUD_Battle.set_name(nameSprite)
 		pass
 	if ( i >=2 ):
-		nameSprite = SingletonPersonaje.get_SpriteName(2)
-		$Personaje3/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
-		$Personaje3.global_position = Vector2(115,450)
-		$Personaje3.visible = true
-		$Personaje3/HUD_Battle.set_name(SingletonPersonaje.get_Name(2))
+		nameSprite = "soldier"
+		$Enemigo3/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
+		$Enemigo3.global_position = Vector2(870,450)
+		$Enemigo3.visible = true
+		$Enemigo3/HUD_Battle.set_name(nameSprite)
 		pass
 	CantidadPJ = i
 	pass
-
-func Ataq_Player():
-	if !Ataq :
-		if ( $MenuBatalla.get_boton() == "ATACAR" )||Input.is_action_just_pressed("ui_accept"):
-			$MenuBatalla.visible = false
-			Org_Mov = $Personaje1.global_position
-			$Personaje1/AnimationPlayer.get_animation("Moverse").track_set_key_value(1,0,Org_Mov)
-			$Personaje1/AnimationPlayer.get_animation("Moverse").track_set_key_value(1,1,$arche.global_position)
-			$Personaje1/AnimationPlayer.play("Moverse")
-			Ataq = true
-			contAtaq = 0
-			pass
+	
+func Esperas():
+	if Esperando :
+		$MenuBatalla.visible = true
+		if EntitiEspera == 0 :
+			$MenuBatalla.set_name(SingletonPersonaje.get_Name(0))
+			if Atacar_PJ1() :
+				Esperando = false
+				EntitiEspera = -1
+				$Personaje1/HUD_Battle.reset_time()
+				pass
+		elif EntitiEspera == 1 :
+			$MenuBatalla.set_name(SingletonPersonaje.get_Name(1))
+			if Atacar_PJ2() :
+				Esperando = false
+				EntitiEspera = -1
+				$Personaje2/HUD_Battle.reset_time()
+				pass
+		elif EntitiEspera == 2 :
+			$MenuBatalla.set_name(SingletonPersonaje.get_Name(2))
+			if Atacar_PJ3() :
+				Esperando = false
+				EntitiEspera = -1
+				$Personaje3/HUD_Battle.reset_time()
+				pass
 		pass
 	else:
-		if(!$Personaje1/AnimationPlayer.is_playing() && (contAtaq == 0)):
-			$Personaje1/AnimationPlayer.play("Atacar")
-			contAtaq = 1
+		$MenuBatalla.visible = false
+		if ($Personaje1/HUD_Battle.set_time(SingletonPersonaje.get_Velocidad(0))):
+			Esperando = true
+			EntitiEspera = 0
 			pass
-		elif(!$Personaje1/AnimationPlayer.is_playing() && (contAtaq == 1)):
-			
-			$Personaje1/Sprite.flip_h = !$Personaje1/Sprite.flip_h
-			$Personaje1/AnimationPlayer.get_animation("Moverse").track_set_key_value(1,0,$Personaje1.global_position)
-			$Personaje1/AnimationPlayer.get_animation("Moverse").track_set_key_value(1,1,Org_Mov)
-			$Personaje1/AnimationPlayer.play("Moverse")
-			contAtaq = 2
+		elif ($Personaje2/HUD_Battle.set_time(SingletonPersonaje.get_Velocidad(1))):
+			Esperando = true
+			EntitiEspera = 1
 			pass
-		elif(!$Personaje1/AnimationPlayer.is_playing() && (contAtaq == 2)):
-			$Personaje1/AnimationPlayer.play("Espera")
-			$Personaje1/Sprite.flip_h = !$Personaje1/Sprite.flip_h
-			contAtaq = 0
-			$MenuBatalla.visible = true
-			Ataq = false
+		elif ($Personaje3/HUD_Battle.set_time(SingletonPersonaje.get_Velocidad(2))):
+			Esperando = true
+			EntitiEspera = 2
 			pass
 		pass
 	pass
+
+func Atacar_PJ1():
+	var terminado = false
+	##Ataq_Player()
+	if ( $MenuBatalla.get_boton() == "ATACAR" ):
+		$Personaje1.Ataq_Player($arche.global_position)
+		$MenuBatalla.visible = false
+		Ataq = true
+		pass
+	else:
+		if Ataq :
+			if(!$Personaje1.Ataq_Player($arche.global_position)):
+				$MenuBatalla.visible = true
+				Ataq = false
+				terminado = true
+				pass
+			pass
+	
+	return terminado
+
+func Atacar_PJ2():
+	var terminado = false
+	##Ataq_Player()
+	if ( $MenuBatalla.get_boton() == "ATACAR" ):
+		$Personaje2.Ataq_Player($arche.global_position)
+		$MenuBatalla.visible = false
+		Ataq = true
+		pass
+	else:
+		if Ataq :
+			if(!$Personaje2.Ataq_Player($arche.global_position)):
+				$MenuBatalla.visible = true
+				Ataq = false
+				terminado = true
+				pass
+			pass
+	
+	return terminado
+
+func Atacar_PJ3():
+	var terminado = false
+	##Ataq_Player()
+	if ( $MenuBatalla.get_boton() == "ATACAR" ):
+		$Personaje3.Ataq_Player($arche.global_position)
+		$MenuBatalla.visible = false
+		Ataq = true
+		pass
+	else:
+		if Ataq :
+			if(!$Personaje3.Ataq_Player($arche.global_position)):
+				$MenuBatalla.visible = true
+				Ataq = false
+				terminado = true
+				pass
+			pass
+	
+	return terminado

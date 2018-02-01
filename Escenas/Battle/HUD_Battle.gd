@@ -2,6 +2,8 @@ extends Node2D
 
 var Vida =0
 var VidaMax=0
+var time = 1000
+var maxtime = 1000
 
 var Magia =0
 var MagiaMax =0
@@ -36,6 +38,22 @@ func set_MagiaMax(var magM=0):
 	MagiaMax = magM
 	pass
 
+func set_time(var tim=0):
+	time -= tim
+	if time <=0 :
+		return true
+	else:
+		return false
+	pass
+
+func get_time():
+	return time
+	pass
+
+func reset_time():
+	time = maxtime
+	pass
+
 func Inicio():
 	iniciar = true
 
@@ -44,6 +62,9 @@ func _process(delta):
 		$PS_ENTIDAD.text = String(Vida) + "/" + String(VidaMax)
 		var rec = ($ColorRectFondo.margin_right * Vida)  / VidaMax
 		$ColorRectVida.margin_right = rec
+		
+		rec = ($ColorRectFondo3.margin_right * time)  / maxtime
+		$ColorRectTiempo.margin_right = rec
 		
 		if( MagiaMax > 0 ):
 			$MP_ENTIDAD.text = String(Magia) + "/" + String(MagiaMax)

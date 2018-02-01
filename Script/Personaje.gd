@@ -53,6 +53,10 @@ func get_SpriteName(var rd):
 	return Personajes[rd].NameSprite
 	pass
 
+func get_Velocidad(var rd):
+	return Personajes[rd].Velocidad
+	pass
+
 func get_SizePJ():
 	return Personajes.size()
 	pass
