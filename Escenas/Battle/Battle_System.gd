@@ -22,7 +22,20 @@ func _process(delta):
 		InicializarEnemy()
 		inicializado=true
 		
-	Ataq_Player()
+	##Ataq_Player()
+	if ( $MenuBatalla.get_boton() == "ATACAR" )||Input.is_action_just_pressed("ui_accept"):
+		$Personaje2.Ataq_Player($arche.global_position)
+		$MenuBatalla.visible = false
+		Ataq = true
+		pass
+	else:
+		if Ataq :
+			if(!$Personaje2.Ataq_Player($arche.global_position)):
+				$MenuBatalla.visible = true
+				Ataq = false
+				pass
+			pass
+	
 	
 	pass
 
