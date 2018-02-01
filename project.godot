@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 
 SingletonPersonaje="*res://Script/Personaje.gd"
 Singleton_Mapa="*res://Script/Singleton_Mapa.gd"
+SingletonEnemigos="*res://Script/Enemigos.gd"
 
 [display]
 
