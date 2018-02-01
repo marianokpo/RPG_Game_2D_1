@@ -18,15 +18,25 @@ texture = ExtResource( 2 )
 
 [node name="arche" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 844.687, 300.915 )
+position = Vector2( 1264.29, 265.899 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Personaje" parent="." index="2" instance=ExtResource( 4 )]
+[node name="Personaje1" parent="." index="2" instance=ExtResource( 4 )]
 
-position = Vector2( 184.843, 315.328 )
+position = Vector2( -344.911, 249.495 )
 
-[node name="MenuBatalla" parent="." index="3" instance=ExtResource( 5 )]
+[node name="Personaje2" parent="." index="3" instance=ExtResource( 4 )]
 
-position = Vector2( 337.379, 419.067 )
+visible = false
+position = Vector2( -344.911, 249.495 )
+
+[node name="Personaje3" parent="." index="4" instance=ExtResource( 4 )]
+
+visible = false
+position = Vector2( -344.911, 249.495 )
+
+[node name="MenuBatalla" parent="." index="5" instance=ExtResource( 5 )]
+
+position = Vector2( 495.271, 429.32 )
 
 

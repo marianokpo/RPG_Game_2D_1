@@ -1,16 +1,16 @@
 extends Node2D
 
-var vid = SingletonPersonaje.Vida
-var mag = SingletonPersonaje.Magia
+var vid = SingletonPersonaje.get_Vida(0)
+var mag = SingletonPersonaje.get_Magia(0)
 
 func _ready():
 	$HUD_Battle.set_name("Mariano")
-	$HUD_Battle.set_Nivel(SingletonPersonaje.Nivel)
+	$HUD_Battle.set_Nivel(SingletonPersonaje.get_Nivel(0))
 	
-	$HUD_Battle.set_VidaMax(SingletonPersonaje.VidaMax)
+	$HUD_Battle.set_VidaMax(SingletonPersonaje.get_VidaMax(0))
 	$HUD_Battle.set_Vida(vid)
 	
-	$HUD_Battle.set_MagiaMax(SingletonPersonaje.MagiaMax)
+	$HUD_Battle.set_MagiaMax(SingletonPersonaje.get_MagiaMax(0))
 	$HUD_Battle.set_Magia(mag)
 	
 	$HUD_Battle.Inicio()

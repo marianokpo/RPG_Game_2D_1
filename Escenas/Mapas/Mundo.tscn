@@ -8,19 +8,15 @@
 
 script/source = "extends Node2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = \"textvar\"
-
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
 	$Personaje.global_position.x = Singleton_Mapa.get_posTP_X()
 	$Personaje.global_position.y = Singleton_Mapa.get_posTP_Y()
+	
 	pass
 
 func _process(delta):
 	Singleton_Mapa.set_posTP($Personaje.global_position.x,$Personaje.global_position.y)
+	
 	pass
 "
 
