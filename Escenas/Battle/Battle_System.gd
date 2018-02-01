@@ -13,6 +13,8 @@ var Esperando = false
 
 var EntitiEspera = -1 ## 0,1,2 == player 3,4,5 == Enemy
 
+var ArrayEnemigos = []
+
 func _ready():
 	
 	pass
@@ -52,24 +54,30 @@ func InicializarPJ():
 	pass
 
 func InicializarEnemy():
-	var i = 2
-	var nameSprite = "arche"
+	var i = SingletonEnemigo.get_size()
+	ArrayEnemigos.append(SingletonEnemigo.get_Enemigo(0))
+	var nameSprite = ArrayEnemigos[0].NameSprite
 	$Enemigo1/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
 	$Enemigo1.global_position = Vector2(725,270)
-	$Enemigo1/HUD_Battle.set_name(nameSprite)
+	$Enemigo1/HUD_Battle.set_name(ArrayEnemigos[0].Name)
+	$Enemigo1.Cargar_datos(ArrayEnemigos[0])
 	if( i >=1 ):
-		nameSprite = "Kratos"
+		ArrayEnemigos.append(SingletonEnemigo.get_Enemigo(1))
+		nameSprite = ArrayEnemigos[1].NameSprite
 		$Enemigo2/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
 		$Enemigo2.global_position = Vector2(870,180)
 		$Enemigo2.visible = true
-		$Enemigo2/HUD_Battle.set_name(nameSprite)
+		$Enemigo2/HUD_Battle.set_name(ArrayEnemigos[1].Name)
+		$Enemigo2.Cargar_datos(ArrayEnemigos[1])
 		pass
 	if ( i >=2 ):
-		nameSprite = "soldier"
+		ArrayEnemigos.append(SingletonEnemigo.get_Enemigo(2))
+		nameSprite = ArrayEnemigos[2].NameSprite
 		$Enemigo3/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
 		$Enemigo3.global_position = Vector2(870,450)
 		$Enemigo3.visible = true
-		$Enemigo3/HUD_Battle.set_name(nameSprite)
+		$Enemigo3/HUD_Battle.set_name(ArrayEnemigos[2].Name)
+		$Enemigo3.Cargar_datos(ArrayEnemigos[2])
 		pass
 	CantidadPJ = i
 	pass
