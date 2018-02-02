@@ -29,6 +29,17 @@ func _process(delta):
 		InicializarPJ()
 		InicializarEnemy()
 		inicializado=true
+	else:
+		var con=0
+		for i in ArrayEnemigos.size() :
+			if ArrayEnemigos[i].Vida > 0 :
+				con +=1
+			pass
+		if con <= 0 :
+			ArrayEnemigos.clear()
+			SingletonEnemigo.ArrayEnemigo.clear()
+			get_tree().change_scene("res://Escenas/Mapas/Mundo.tscn")
+		pass
 	Esperas()
 	pass
 
@@ -62,7 +73,7 @@ func InicializarEnemy():
 	$Enemigo1/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
 	$Enemigo1.global_position = Vector2(725,270)
 	$Enemigo1/HUD_Battle.set_name(ArrayEnemigos[0].Name)
-	$Enemigo1.Cargar_datos(ArrayEnemigos[0])
+	$Enemigo1.Cargar_datos(ArrayEnemigos[0],0)
 	if( i >=1 ):
 		ArrayEnemigos.append(SingletonEnemigo.get_Enemigo(1))
 		nameSprite = ArrayEnemigos[1].NameSprite
@@ -70,7 +81,7 @@ func InicializarEnemy():
 		$Enemigo2.global_position = Vector2(870,180)
 		$Enemigo2.visible = true
 		$Enemigo2/HUD_Battle.set_name(ArrayEnemigos[1].Name)
-		$Enemigo2.Cargar_datos(ArrayEnemigos[1])
+		$Enemigo2.Cargar_datos(ArrayEnemigos[1],1)
 		pass
 	if ( i >=2 ):
 		ArrayEnemigos.append(SingletonEnemigo.get_Enemigo(2))
@@ -79,31 +90,32 @@ func InicializarEnemy():
 		$Enemigo3.global_position = Vector2(870,360)
 		$Enemigo3.visible = true
 		$Enemigo3/HUD_Battle.set_name(ArrayEnemigos[2].Name)
-		$Enemigo3.Cargar_datos(ArrayEnemigos[2])
+		$Enemigo3.Cargar_datos(ArrayEnemigos[2],2)
 		pass
 	CantidadPJ = i
 	pass
-	
+
+
 func Esperas():
 	if Esperando :
 		$MenuBatalla.visible = true
 		if EntitiEspera == 0 :
 			$MenuBatalla.set_name(SingletonPersonaje.get_Name(0))
-			if Atacar_PJ1() :
+			if Atacar_PJ($Personaje1) :
 				Esperando = false
 				EntitiEspera = -1
 				$Personaje1/HUD_Battle.reset_time()
 				pass
 		elif EntitiEspera == 1 :
 			$MenuBatalla.set_name(SingletonPersonaje.get_Name(1))
-			if Atacar_PJ2() :
+			if Atacar_PJ($Personaje2) :
 				Esperando = false
 				EntitiEspera = -1
 				$Personaje2/HUD_Battle.reset_time()
 				pass
 		elif EntitiEspera == 2 :
 			$MenuBatalla.set_name(SingletonPersonaje.get_Name(2))
-			if Atacar_PJ3() :
+			if Atacar_PJ($Personaje3) :
 				Esperando = false
 				EntitiEspera = -1
 				$Personaje3/HUD_Battle.reset_time()
@@ -127,18 +139,23 @@ func Esperas():
 	pass
 
 
-func Atacar_PJ1():
+func Atacar_PJ(var pj):
 	var terminado = false
 	if indexEnemigoAtacado < 0 :
 		if ( $MenuBatalla.get_boton() == "ATACAR" ):
 				$Cursor.reset()
-				$Cursor.set_Target_Max(ArrayEnemigos.size())
+				$Cursor.visible = true
+				var vidaa = []
+				for i in ArrayEnemigos.size():
+					vidaa.append(ArrayEnemigos[i].Vida)
+					pass
+				$Cursor.set_Target_Max(vidaa)
 				$Cursor.target = 0
 				indexEnemigoAtacado = $Cursor.get_Target_Select()
 				pass
 		else:
 			if Ataq :
-				if(!$Personaje1.Ataq_Player($Enemigo1.global_position)):
+				if(!pj.Ataq_Player($Enemigo1.global_position)):
 					$MenuBatalla.visible = true
 					Ataq = false
 					terminado = true
@@ -151,98 +168,35 @@ func Atacar_PJ1():
 	else:
 		indexEnemigoAtacado = $Cursor.get_Target_Select()
 		if indexEnemigoAtacado > 0 :
+			$Cursor.visible = false
 			if indexEnemigoAtacado == 1 :
-				$Personaje1.Ataq_Player($Enemigo1.global_position)
+				if !pj.Ataq_Player($Enemigo1.global_position) :
+					Golpear()
+					$MenuBatalla.visible = false
+					indexEnemigoAtacado = -1
+					$Cursor.reset()
+					Ataq = true
 				pass
 			elif indexEnemigoAtacado == 2:
-				$Personaje1.Ataq_Player($Enemigo2.global_position)
+				if !pj.Ataq_Player($Enemigo2.global_position) :
+					Golpear()
+					$MenuBatalla.visible = false
+					indexEnemigoAtacado = -1
+					$Cursor.reset()
+					Ataq = true
 				pass
 			elif indexEnemigoAtacado == 3:
-				$Personaje1.Ataq_Player($Enemigo3.global_position)
+				if !pj.Ataq_Player($Enemigo3.global_position) :
+					Golpear()
+					$MenuBatalla.visible = false
+					indexEnemigoAtacado = -1
+					$Cursor.reset()
+					Ataq = true
 				pass
-			$MenuBatalla.visible = false
-			indexEnemigoAtacado = -1
-			$Cursor.reset()
-			Ataq = true
+			pass
 		pass
 	return terminado
 
-func Atacar_PJ2():
-	var terminado = false
-	if indexEnemigoAtacado < 0 :
-		if ( $MenuBatalla.get_boton() == "ATACAR" ):
-				$Cursor.reset()
-				$Cursor.set_Target_Max(ArrayEnemigos.size())
-				$Cursor.target = 0
-				indexEnemigoAtacado = $Cursor.get_Target_Select()
-				pass
-		else:
-			if Ataq :
-				if(!$Personaje2.Ataq_Player($Enemigo1.global_position)):
-					$MenuBatalla.visible = true
-					Ataq = false
-					terminado = true
-					$Cursor.reset()
-					indexEnemigoAtacado = -1
-					pass
-				pass
-			pass
-		pass
-	else:
-		indexEnemigoAtacado = $Cursor.get_Target_Select()
-		if indexEnemigoAtacado > 0 :
-			if indexEnemigoAtacado == 1 :
-				$Personaje2.Ataq_Player($Enemigo1.global_position)
-				pass
-			elif indexEnemigoAtacado == 2:
-				$Personaje2.Ataq_Player($Enemigo2.global_position)
-				pass
-			elif indexEnemigoAtacado == 3:
-				$Personaje2.Ataq_Player($Enemigo3.global_position)
-				pass
-			$MenuBatalla.visible = false
-			indexEnemigoAtacado = -1
-			$Cursor.reset()
-			Ataq = true
-		pass
-	return terminado
-
-func Atacar_PJ3():
-	var terminado = false
-	if indexEnemigoAtacado < 0 :
-		if ( $MenuBatalla.get_boton() == "ATACAR" ):
-				$Cursor.reset()
-				$Cursor.set_Target_Max(ArrayEnemigos.size())
-				$Cursor.target = 0
-				indexEnemigoAtacado = $Cursor.get_Target_Select()
-				pass
-		else:
-			if Ataq :
-				if(!$Personaje3.Ataq_Player($Enemigo1.global_position)):
-					$MenuBatalla.visible = true
-					Ataq = false
-					terminado = true
-					$Cursor.reset()
-					indexEnemigoAtacado = -1
-					pass
-				pass
-			pass
-		pass
-	else:
-		indexEnemigoAtacado = $Cursor.get_Target_Select()
-		if indexEnemigoAtacado > 0 :
-			if indexEnemigoAtacado == 1 :
-				$Personaje3.Ataq_Player($Enemigo1.global_position)
-				pass
-			elif indexEnemigoAtacado == 2:
-				$Personaje3.Ataq_Player($Enemigo2.global_position)
-				pass
-			elif indexEnemigoAtacado == 3:
-				$Personaje3.Ataq_Player($Enemigo3.global_position)
-				pass
-			$MenuBatalla.visible = false
-			indexEnemigoAtacado = -1
-			$Cursor.reset()
-			Ataq = true
-		pass
-	return terminado
+func Golpear():
+	SingletonEnemigo.ArrayEnemigo[indexEnemigoAtacado-1].Golpe_PS(10)
+	pass

@@ -12,6 +12,7 @@ func _process(delta):
 		if Singleton_Mapa.move :
 			randomize()
 			if (randi()%8) == 0 :
+				SingletonEnemigo.ArrayEnemigo.clear()
 				SingletonEnemigo.GenerarEnemigos([0,1,2],2)
 				get_tree().change_scene("res://Escenas/Battle/Battle_System.tscn")
 				pass

@@ -1,5 +1,7 @@
 extends Node2D
 
+var index = -1
+
 var nivel = 1
 
 var nombre = ""
@@ -23,11 +25,21 @@ func _ready():
 
 func _process(delta):
 	if iniciado :
+		Update()
 		$HUD_Battle.set_Vida(vida)
 		$HUD_Battle.set_Magia(magia)
+		if vida <= 0 :
+			##SingletonEnemigo.ArrayEnemigo.erase(SingletonEnemigo.ArrayEnemigo[index])
+			iniciado = false
+			global_position = Vector2( -1000, -1000)
+			visible = false
+			pass
 	pass
 
-func Cargar_datos(var En):
+func Cargar_datos(var En, var ind):
+	
+	index = ind
+	
 	nivel = En.Nivel
 
 	nombre = En.Name
@@ -52,4 +64,11 @@ func Cargar_datos(var En):
 	
 	$HUD_Battle.Inicio()
 	iniciado = true
+	pass
+
+func Update():
+	
+	vida = SingletonEnemigo.ArrayEnemigo[index].Vida
+	magia = SingletonEnemigo.ArrayEnemigo[index].Magia
+	
 	pass

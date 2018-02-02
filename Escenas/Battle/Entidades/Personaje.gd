@@ -49,6 +49,7 @@ func Ataq_Player(var en_pos = Vector2()):
 		if(!$AnimationPlayer.is_playing() && (contAtaq == 0)):
 			$AnimationPlayer.play("Atacar")
 			contAtaq = 1
+			estado = false
 			pass
 		elif(!$AnimationPlayer.is_playing() && (contAtaq == 1)):
 			
@@ -66,5 +67,5 @@ func Ataq_Player(var en_pos = Vector2()):
 			estado = false
 			$HUD_Battle.visible = true
 			pass
-		return estado
+	return estado
 	pass

@@ -135,7 +135,7 @@ tracks/0/keys = {
 
 resource_name = "Caminar_Izquierda"
 length = 0.4
-loop = false
+loop = true
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -231,7 +231,7 @@ tracks/0/keys = {
 custom_solver_bias = 0.0
 extents = Vector2( 10.6165, 9.04931 )
 
-[node name="Personaje" type="KinematicBody2D" groups=[
+[node name="Personaje" type="KinematicBody2D" index="0" groups=[
 "PJ",
 ]]
 
