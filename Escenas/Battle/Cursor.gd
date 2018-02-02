@@ -7,14 +7,14 @@ func _ready():
 	pass
 
 func _process(delta):
-	if targetMax == 1 :
+	if targetMax >= 1 :
 		$Button1.visible = true
 		pass
-	if targetMax == 2 :
+	if targetMax >= 2 :
 		$Button2.visible = true
 		pass
-	if targetMax == 3 :
-		$Button2.visible = true
+	if targetMax >= 3 :
+		$Button3.visible = true
 		pass
 	pass
 
@@ -28,6 +28,7 @@ func set_Target_Max(var tar=0):
 
 func reset():
 	target = -1
+	targetMax = -1
 	$Button1.visible = false
 	$Button2.visible = false
 	$Button3.visible = false

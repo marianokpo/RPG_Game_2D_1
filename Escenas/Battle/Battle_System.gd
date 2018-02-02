@@ -132,7 +132,7 @@ func Atacar_PJ1():
 	if indexEnemigoAtacado < 0 :
 		if ( $MenuBatalla.get_boton() == "ATACAR" ):
 				$Cursor.reset()
-				$Cursor.set_Target_Max(ArrayEnemigos.size() + 1)
+				$Cursor.set_Target_Max(ArrayEnemigos.size())
 				$Cursor.target = 0
 				indexEnemigoAtacado = $Cursor.get_Target_Select()
 				pass
@@ -151,46 +151,98 @@ func Atacar_PJ1():
 	else:
 		indexEnemigoAtacado = $Cursor.get_Target_Select()
 		if indexEnemigoAtacado > 0 :
-			$Personaje1.Ataq_Player($Enemigo1.global_position)
+			if indexEnemigoAtacado == 1 :
+				$Personaje1.Ataq_Player($Enemigo1.global_position)
+				pass
+			elif indexEnemigoAtacado == 2:
+				$Personaje1.Ataq_Player($Enemigo2.global_position)
+				pass
+			elif indexEnemigoAtacado == 3:
+				$Personaje1.Ataq_Player($Enemigo3.global_position)
+				pass
 			$MenuBatalla.visible = false
+			indexEnemigoAtacado = -1
+			$Cursor.reset()
 			Ataq = true
 		pass
 	return terminado
 
 func Atacar_PJ2():
 	var terminado = false
-	##Ataq_Player()
-	if ( $MenuBatalla.get_boton() == "ATACAR" ):
-		$Personaje2.Ataq_Player($arche.global_position)
-		$MenuBatalla.visible = false
-		Ataq = true
-		pass
-	else:
-		if Ataq :
-			if(!$Personaje2.Ataq_Player($arche.global_position)):
-				$MenuBatalla.visible = true
-				Ataq = false
-				terminado = true
+	if indexEnemigoAtacado < 0 :
+		if ( $MenuBatalla.get_boton() == "ATACAR" ):
+				$Cursor.reset()
+				$Cursor.set_Target_Max(ArrayEnemigos.size())
+				$Cursor.target = 0
+				indexEnemigoAtacado = $Cursor.get_Target_Select()
+				pass
+		else:
+			if Ataq :
+				if(!$Personaje2.Ataq_Player($Enemigo1.global_position)):
+					$MenuBatalla.visible = true
+					Ataq = false
+					terminado = true
+					$Cursor.reset()
+					indexEnemigoAtacado = -1
+					pass
 				pass
 			pass
-	
+		pass
+	else:
+		indexEnemigoAtacado = $Cursor.get_Target_Select()
+		if indexEnemigoAtacado > 0 :
+			if indexEnemigoAtacado == 1 :
+				$Personaje2.Ataq_Player($Enemigo1.global_position)
+				pass
+			elif indexEnemigoAtacado == 2:
+				$Personaje2.Ataq_Player($Enemigo2.global_position)
+				pass
+			elif indexEnemigoAtacado == 3:
+				$Personaje2.Ataq_Player($Enemigo3.global_position)
+				pass
+			$MenuBatalla.visible = false
+			indexEnemigoAtacado = -1
+			$Cursor.reset()
+			Ataq = true
+		pass
 	return terminado
 
 func Atacar_PJ3():
 	var terminado = false
-	##Ataq_Player()
-	if ( $MenuBatalla.get_boton() == "ATACAR" ):
-		$Personaje3.Ataq_Player($arche.global_position)
-		$MenuBatalla.visible = false
-		Ataq = true
-		pass
-	else:
-		if Ataq :
-			if(!$Personaje3.Ataq_Player($arche.global_position)):
-				$MenuBatalla.visible = true
-				Ataq = false
-				terminado = true
+	if indexEnemigoAtacado < 0 :
+		if ( $MenuBatalla.get_boton() == "ATACAR" ):
+				$Cursor.reset()
+				$Cursor.set_Target_Max(ArrayEnemigos.size())
+				$Cursor.target = 0
+				indexEnemigoAtacado = $Cursor.get_Target_Select()
+				pass
+		else:
+			if Ataq :
+				if(!$Personaje3.Ataq_Player($Enemigo1.global_position)):
+					$MenuBatalla.visible = true
+					Ataq = false
+					terminado = true
+					$Cursor.reset()
+					indexEnemigoAtacado = -1
+					pass
 				pass
 			pass
-	
+		pass
+	else:
+		indexEnemigoAtacado = $Cursor.get_Target_Select()
+		if indexEnemigoAtacado > 0 :
+			if indexEnemigoAtacado == 1 :
+				$Personaje3.Ataq_Player($Enemigo1.global_position)
+				pass
+			elif indexEnemigoAtacado == 2:
+				$Personaje3.Ataq_Player($Enemigo2.global_position)
+				pass
+			elif indexEnemigoAtacado == 3:
+				$Personaje3.Ataq_Player($Enemigo3.global_position)
+				pass
+			$MenuBatalla.visible = false
+			indexEnemigoAtacado = -1
+			$Cursor.reset()
+			Ataq = true
+		pass
 	return terminado

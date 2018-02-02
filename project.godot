@@ -23,6 +23,7 @@ SingletonEnemigo="*res://Script/ImplementadoEnemigo.gd"
 [display]
 
 window/handheld/emulate_touchscreen=true
+window/stretch/mode="viewport"
 
 [locale]
 
