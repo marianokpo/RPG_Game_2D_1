@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Escenas/Battle/Cursor.gd" type="Script" id=1]
+[ext_resource path="res://Recursos/Battle/HUD/target_1.png" type="Texture" id=2]
+
+[node name="Cursor" type="Node2D"]
+
+script = ExtResource( 1 )
+
+[node name="Button1" type="TouchScreenButton" parent="." index="0"]
+
+visible = false
+scale = Vector2( 0.5, 0.5 )
+normal = ExtResource( 2 )
+pressed = null
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+
+[node name="Button2" type="TouchScreenButton" parent="." index="1"]
+
+visible = false
+position = Vector2( 143.039, -90.3769 )
+scale = Vector2( 0.5, 0.5 )
+normal = ExtResource( 2 )
+pressed = null
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+
+[node name="Button3" type="TouchScreenButton" parent="." index="2"]
+
+visible = false
+position = Vector2( 143.039, 87.8321 )
+scale = Vector2( 0.5, 0.5 )
+normal = ExtResource( 2 )
+pressed = null
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+_sections_unfolded = [ "Transform" ]
+
+[connection signal="pressed" from="Button1" to="." method="_on_Button1_pressed"]
+
+[connection signal="pressed" from="Button2" to="." method="_on_Button2_pressed"]
+
+[connection signal="pressed" from="Button3" to="." method="_on_Button3_pressed"]
+
+

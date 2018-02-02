@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Escenas/Battle/Battle_System.gd" type="Script" id=1]
 [ext_resource path="res://Recursos/Battle/Fondo/Pasto1.jpg" type="Texture" id=2]
 [ext_resource path="res://Escenas/Battle/Entidades/Personaje.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Escenas/Battle/Entidades/Enemigo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Escenas/Battle/MenuBatalla.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Escenas/Battle/Cursor.tscn" type="PackedScene" id=6]
 
 [node name="Battle_System" type="Node2D" index="0"]
 
@@ -48,5 +49,9 @@ position = Vector2( 1322.23, 276.161 )
 
 visible = false
 position = Vector2( 495.271, 429.32 )
+
+[node name="Cursor" parent="." index="8" instance=ExtResource( 6 )]
+
+position = Vector2( 675.535, 210.898 )
 
 

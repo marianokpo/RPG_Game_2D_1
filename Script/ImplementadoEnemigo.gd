@@ -38,7 +38,7 @@ func AddEnemigos(var id, var Lvl, var nam=0):
 
 func GenerarLvlEnemigo(var Enem, var Lvl, var nam=0):
 	var newLvl = Lvl
-	newLvl += ((randi()%3) - 2)
+	newLvl += ((randi()%3) - 1)
 	Enem.Name = Enem.Name + " " + String(nam)
 	Enem.Nivel = newLvl
 	for i in newLvl - 1:

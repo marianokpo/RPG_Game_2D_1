@@ -15,6 +15,8 @@ var EntitiEspera = -1 ## 0,1,2 == player 3,4,5 == Enemy
 
 var ArrayEnemigos = []
 
+var indexEnemigoAtacado = -1
+
 func _ready():
 	
 	pass
@@ -46,7 +48,7 @@ func InicializarPJ():
 	if ( i >=2 ):
 		nameSprite = SingletonPersonaje.get_SpriteName(2)
 		$Personaje3/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
-		$Personaje3.global_position = Vector2(115,450)
+		$Personaje3.global_position = Vector2(115,360)
 		$Personaje3.visible = true
 		$Personaje3/HUD_Battle.set_name(SingletonPersonaje.get_Name(2))
 		pass
@@ -74,7 +76,7 @@ func InicializarEnemy():
 		ArrayEnemigos.append(SingletonEnemigo.get_Enemigo(2))
 		nameSprite = ArrayEnemigos[2].NameSprite
 		$Enemigo3/Sprite.texture = load("res://Recursos/Battle/Personaje/"+ nameSprite +".png")
-		$Enemigo3.global_position = Vector2(870,450)
+		$Enemigo3.global_position = Vector2(870,360)
 		$Enemigo3.visible = true
 		$Enemigo3/HUD_Battle.set_name(ArrayEnemigos[2].Name)
 		$Enemigo3.Cargar_datos(ArrayEnemigos[2])
@@ -124,23 +126,35 @@ func Esperas():
 		pass
 	pass
 
+
 func Atacar_PJ1():
 	var terminado = false
-	##Ataq_Player()
-	if ( $MenuBatalla.get_boton() == "ATACAR" ):
-		$Personaje1.Ataq_Player($arche.global_position)
-		$MenuBatalla.visible = false
-		Ataq = true
-		pass
-	else:
-		if Ataq :
-			if(!$Personaje1.Ataq_Player($arche.global_position)):
-				$MenuBatalla.visible = true
-				Ataq = false
-				terminado = true
+	if indexEnemigoAtacado < 0 :
+		if ( $MenuBatalla.get_boton() == "ATACAR" ):
+				$Cursor.reset()
+				$Cursor.set_Target_Max(ArrayEnemigos.size() + 1)
+				$Cursor.target = 0
+				indexEnemigoAtacado = $Cursor.get_Target_Select()
+				pass
+		else:
+			if Ataq :
+				if(!$Personaje1.Ataq_Player($Enemigo1.global_position)):
+					$MenuBatalla.visible = true
+					Ataq = false
+					terminado = true
+					$Cursor.reset()
+					indexEnemigoAtacado = -1
+					pass
 				pass
 			pass
-	
+		pass
+	else:
+		indexEnemigoAtacado = $Cursor.get_Target_Select()
+		if indexEnemigoAtacado > 0 :
+			$Personaje1.Ataq_Player($Enemigo1.global_position)
+			$MenuBatalla.visible = false
+			Ataq = true
+		pass
 	return terminado
 
 func Atacar_PJ2():
