@@ -7,7 +7,7 @@
 [ext_resource path="res://Escenas/Battle/MenuBatalla.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Escenas/Battle/Cursor.tscn" type="PackedScene" id=6]
 
-[node name="Battle_System" type="Node2D"]
+[node name="Battle_System" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 

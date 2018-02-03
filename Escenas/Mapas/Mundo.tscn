@@ -115,7 +115,7 @@ extents = Vector2( 23.1172, 29.6759 )
 custom_solver_bias = 0.0
 extents = Vector2( 132.802, 99.8093 )
 
-[node name="Mundo" type="Node2D" index="0"]
+[node name="Mundo" type="Node2D"]
 
 script = SubResource( 1 )
 
@@ -271,7 +271,7 @@ shape = SubResource( 7 )
 [node name="Enemigo1" type="Area2D" parent="." index="6"]
 
 editor/display_folded = true
-position = Vector2( -304.21, -48.421 )
+position = Vector2( -265.21, 143.579 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

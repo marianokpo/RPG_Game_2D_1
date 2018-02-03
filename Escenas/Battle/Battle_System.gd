@@ -120,6 +120,24 @@ func Esperas():
 				EntitiEspera = -1
 				$Personaje3/HUD_Battle.reset_time()
 				pass
+		elif EntitiEspera == 3 :
+			if Atacar_Enem($Enemigo1) :
+				Esperando = false
+				EntitiEspera = -1
+				$Enemigo1/HUD_Battle.reset_time()
+				pass
+		elif EntitiEspera == 4 :
+			if Atacar_Enem($Enemigo2) :
+				Esperando = false
+				EntitiEspera = -1
+				$Enemigo2/HUD_Battle.reset_time()
+				pass
+		elif EntitiEspera == 5 :
+			if Atacar_Enem($Enemigo3) :
+				Esperando = false
+				EntitiEspera = -1
+				$Enemigo3/HUD_Battle.reset_time()
+				pass
 		pass
 	else:
 		$MenuBatalla.visible = false
@@ -134,6 +152,20 @@ func Esperas():
 		elif ($Personaje3/HUD_Battle.set_time(SingletonPersonaje.get_Velocidad(2))):
 			Esperando = true
 			EntitiEspera = 2
+			pass
+		elif ($Enemigo1/HUD_Battle.set_time(ArrayEnemigos[0].Velocidad)):
+			Esperando = true
+			EntitiEspera = 3
+			pass
+		elif ArrayEnemigos.size() >= 2:
+			if ($Enemigo2/HUD_Battle.set_time(ArrayEnemigos[1].Velocidad)):
+				Esperando = true
+				EntitiEspera = 4
+			pass
+		elif ArrayEnemigos.size() >= 3 :
+			if ($Enemigo3/HUD_Battle.set_time(ArrayEnemigos[2].Velocidad)):
+				Esperando = true
+				EntitiEspera = 5
 			pass
 		pass
 	pass
@@ -197,6 +229,46 @@ func Atacar_PJ(var pj):
 		pass
 	return terminado
 
+func Atacar_Enem(var enem):
+	var terminado = false
+	if indexEnemigoAtacado < 0 :
+		var id = 0
+		for i in SingletonPersonaje.get_SizePJ():
+			if SingletonPersonaje.Personajes[i].Vida > 0 :
+				id = i+1
+				pass
+			pass
+		indexEnemigoAtacado = id
+		pass
+	else:
+		if indexEnemigoAtacado > 0 :
+			if indexEnemigoAtacado == 1 :
+				if !enem.Ataq_Player($Personaje1.global_position) :
+					GolpearPJ()
+					indexEnemigoAtacado = -1
+					Ataq = true
+				pass
+			elif indexEnemigoAtacado == 2:
+				if !enem.Ataq_Player($Personaje2.global_position) :
+					GolpearPJ()
+					indexEnemigoAtacado = -1
+					Ataq = true
+				pass
+			elif indexEnemigoAtacado == 3:
+				if !enem.Ataq_Player($Personaje3.global_position) :
+					GolpearPJ()
+					indexEnemigoAtacado = -1
+					Ataq = true
+				pass
+			pass
+		pass
+	return terminado
+
+
 func Golpear():
 	SingletonEnemigo.ArrayEnemigo[indexEnemigoAtacado-1].Golpe_PS(10)
+	pass
+
+func GolpearPJ():
+	SingletonPersonaje.Personajes[indexEnemigoAtacado-1].Golpe_PS(10)
 	pass
