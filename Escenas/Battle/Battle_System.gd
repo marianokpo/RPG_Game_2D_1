@@ -21,7 +21,13 @@ var indexEnemigoAtacado = -1
 
 var indexAtacando = -1  # 0 1 y 2 = player     3 4 5 = enemigo
 
+var MagiaSelect = -1
+
 var maxtime = 0
+
+var menuactivo = "NONE"   
+
+var captura
 
 func _ready():
 	
@@ -43,6 +49,9 @@ func _process(delta):
 				con +=1
 			pass
 		if con <= 0 :
+			if captura != null :
+				captura.Restore()
+				SingletonPersonaje.Personajes.append(captura)
 			ArrayEnemigos.clear()
 			SingletonEnemigo.ArrayEnemigo.clear()
 			get_tree().change_scene("res://Escenas/Mapas/Mundo.tscn")
@@ -154,28 +163,15 @@ func InicializarEnemy():
 
 func Esperas():
 	if Esperando :
-		$MenuBatalla.visible = true
 		if EntitiEspera == 0 :
 			$MenuBatalla.set_name(SingletonPersonaje.get_Name(0))
-			if Atacar_PJ($Personaje1,0) :
-				Esperando = false
-				EntitiEspera = -1
-				$Personaje1/HUD_Battle.reset_time()
-				pass
+			Menu_PJ($Personaje1)
 		elif EntitiEspera == 1 :
 			$MenuBatalla.set_name(SingletonPersonaje.get_Name(1))
-			if Atacar_PJ($Personaje2,1) :
-				Esperando = false
-				EntitiEspera = -1
-				$Personaje2/HUD_Battle.reset_time()
-				pass
+			Menu_PJ($Personaje2)
 		elif EntitiEspera == 2 :
 			$MenuBatalla.set_name(SingletonPersonaje.get_Name(2))
-			if Atacar_PJ($Personaje3,2) :
-				Esperando = false
-				EntitiEspera = -1
-				$Personaje3/HUD_Battle.reset_time()
-				pass
+			Menu_PJ($Personaje3)
 		elif EntitiEspera == 3 :
 			AtaEnem = true
 			if Atacar_Enem($Enemigo1,0) :
@@ -239,69 +235,147 @@ func Esperas():
 	pass
 
 
+func Menu_PJ(var pj):
+	match(menuactivo):
+		"NONE":
+			$MenuBatalla.visible = true
+			if($MenuBatalla.get_boton() != "NONE"):
+				menuactivo = $MenuBatalla.get_boton()
+			continue
+		"ATACAR":
+			Cursor_a_Enemigo()
+			if indexEnemigoAtacado >0 :
+				$MenuBatalla.visible = false
+				if Atacar_PJ(pj,pj.index) :
+					menuactivo = "NONE"
+					$Cursor.reset()
+					pj.Reset_Time()
+					Esperando = false
+					EntitiEspera = -1
+					indexEnemigoAtacado = -1
+			continue
+		"MAGIA":
+			if true :
+				Cursor_a_Enemigo()
+				if indexEnemigoAtacado >0 :
+					$MenuBatalla.visible = false
+					if (Magia_PJ(pj,indexEnemigoAtacado)) == -1 :
+						menuactivo = "NONE"
+						$Cursor.reset()
+						pj.Reset_Time()
+						Esperando = false
+						EntitiEspera = -1
+						indexEnemigoAtacado = -1
+			continue
+		"OBJETOS":
+			menuactivo = "NONE"
+			continue
+		"DEFENDER":
+			menuactivo = "NONE"
+			continue
+		"ESCAPAR":
+			menuactivo = "NONE"
+			continue
+	pass
+
+func Cursor_a_Enemigo():
+	if indexEnemigoAtacado < 0 :
+		$Cursor.reset()
+		$Cursor.visible = true
+		var vidaa = []
+		for i in ArrayEnemigos.size():
+			vidaa.append(ArrayEnemigos[i].Vida)
+			pass
+		$Cursor.set_Target_Max(vidaa)
+		$Cursor.target = 0
+	indexEnemigoAtacado = $Cursor.get_Target_Select()
+	pass
+
 func Atacar_PJ(var pj, var idpj):
 	var terminado = false
-	if indexEnemigoAtacado < 0 :
-		if ( $MenuBatalla.get_boton() == "ATACAR" ):
-				$Cursor.reset()
-				$Cursor.visible = true
-				var vidaa = []
-				for i in ArrayEnemigos.size():
-					vidaa.append(ArrayEnemigos[i].Vida)
-					pass
-				$Cursor.set_Target_Max(vidaa)
-				$Cursor.target = 0
-				indexEnemigoAtacado = $Cursor.get_Target_Select()
-				pass
-		else:
-			if Ataq :
-				$MenuBatalla.visible = false
-				if(!pj.Ataq_Player($Enemigo1.global_position)):
-					$MenuBatalla.visible = false
-					Ataq = false
-					terminado = true
-					$Cursor.reset()
-					indexEnemigoAtacado = -1
-					pass
-				pass
+	if indexAtacando == 0 :
+		if(!pj.Ataq_Player($Enemigo1.global_position)):
+			$MenuBatalla.visible = false
+			Ataq = false
+			terminado = true
+			$Cursor.reset()
+			indexAtacando = -1
+			indexEnemigoAtacado = -1
 			pass
 		pass
 	else:
-		indexEnemigoAtacado = $Cursor.get_Target_Select()
-		if indexEnemigoAtacado > 0 :
-			$MenuBatalla.visible = false
-			$Cursor.visible = false
-			indexAtacando = idpj
-			if indexEnemigoAtacado == 1 :
-				if !pj.Ataq_Player($Enemigo1.global_position) :
-					Golpear()
-					indexAtacando = -1
-					$MenuBatalla.visible = false
-					indexEnemigoAtacado = -1
-					$Cursor.reset()
-					Ataq = true
-				pass
-			elif indexEnemigoAtacado == 2:
-				if !pj.Ataq_Player($Enemigo2.global_position) :
-					Golpear()
-					indexAtacando = -1
-					$MenuBatalla.visible = false
-					indexEnemigoAtacado = -1
-					$Cursor.reset()
-					Ataq = true
-				pass
-			elif indexEnemigoAtacado == 3:
-				if !pj.Ataq_Player($Enemigo3.global_position) :
-					Golpear()
-					indexAtacando = -1
-					$MenuBatalla.visible = false
-					indexEnemigoAtacado = -1
-					$Cursor.reset()
-					Ataq = true
-				pass
+		$MenuBatalla.visible = false
+		if indexEnemigoAtacado == 1 :
+			if !pj.Ataq_Player($Enemigo1.global_position) :
+				Golpear()
+				indexAtacando = 0
+				$MenuBatalla.visible = false
+			pass
+		elif indexEnemigoAtacado == 2:
+			if !pj.Ataq_Player($Enemigo2.global_position) :
+				Golpear()
+				indexAtacando = 0
+				$MenuBatalla.visible = false
+			pass
+		elif indexEnemigoAtacado == 3:
+			if !pj.Ataq_Player($Enemigo3.global_position) :
+				Golpear()
+				indexAtacando = -1
+				$MenuBatalla.visible = false
 			pass
 		pass
 	return terminado
+
+func Magia_PJ(var pj, var idEn):
+	var est = pj.Magic_Player(false)
+	match(est):
+		0:
+			var pos = Vector2()
+			match(idEn-1):
+				0:
+					pos = $Enemigo1.global_position
+					continue
+				1:
+					pos = $Enemigo2.global_position
+					continue
+				2:
+					pos = $Enemigo3.global_position
+					continue
+					
+			$Magia.visible = true
+			$Magia/AnimationPlayer.get_animation("Magia").track_set_key_value(1,0,pos)
+			$Magia/AnimationPlayer.get_animation("Magia").track_set_key_value(1,1,pos)
+			$Magia/AnimationPlayer.play("Magia")
+			continue
+		2:
+			est = pj.Magic_Player(true)
+			$Magia.visible = false
+			$Magia.global_position = Vector2(-1000,-1000)
+			if (randi()%10) <= 4 :
+				if captura == null :
+					match(idEn-1):
+						0:
+							$Enemigo1.vida = 0
+							$Enemigo1.visible = false
+							captura = ArrayEnemigos[0]
+							ArrayEnemigos[0].Vida = 0
+							continue
+						1:
+							$Enemigo2.vida = 0
+							$Enemigo2.visible = false
+							captura = ArrayEnemigos[1]
+							ArrayEnemigos[1].Vida = 0
+							continue
+						2:
+							$Enemigo3.vida = 0
+							$Enemigo3.visible = false
+							captura = ArrayEnemigos[2]
+							ArrayEnemigos[2].Vida = 0
+							continue
+				pass
+			continue
+	return est
+	pass
 
 func Atacar_Enem(var enem, var idpj):
 	$MenuBatalla.visible = false

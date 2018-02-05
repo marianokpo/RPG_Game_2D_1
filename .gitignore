@@ -1,0 +1,8 @@
+# KDE
+.directory
+
+# Godot
+*.import
+
+# Proyect
+/Ejecutables/ 

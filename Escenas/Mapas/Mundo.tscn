@@ -115,7 +115,7 @@ extents = Vector2( 23.1172, 29.6759 )
 custom_solver_bias = 0.0
 extents = Vector2( 132.802, 99.8093 )
 
-[node name="Mundo" type="Node2D" index="0"]
+[node name="Mundo" type="Node2D"]
 
 position = Vector2( 0, -1 )
 script = SubResource( 1 )

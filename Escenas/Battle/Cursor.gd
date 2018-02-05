@@ -35,29 +35,22 @@ func set_Target_Max(var vid):
 			if i == 0 :
 				target1 = true
 				pass
-			pass
 			if i == 1 :
 				target2 = true
 				pass
-			pass
 			if i == 2 :
 				target3 = true
 				pass
-			pass
 		else:
 			if i == 0 :
 				target1 = false
 				pass
-			pass
 			if i == 1 :
 				target2 = false
 				pass
-			pass
 			if i == 2 :
 				target3 = false
 				pass
-			pass
-			pass
 		pass
 	targetMax = targ
 	pass

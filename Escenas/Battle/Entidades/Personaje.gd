@@ -39,6 +39,10 @@ func set_index(var id):
 	index = id
 	pass
 
+func Reset_Time():
+	$HUD_Battle.reset_time()
+	pass
+
 func Cargar_datos():
 	
 	nivel = SingletonPersonaje.Personajes[index].Nivel
@@ -114,3 +118,30 @@ func Ataq_Player(var en_pos = Vector2()):
 			pass
 	return estado
 	pass
+
+func Magic_Player(var Damagebool = false):
+	var estado = 0
+	if Damagebool :
+		$AnimationPlayer.play("Espera")
+		estado = -1
+		Ataq = false
+		pass
+	else:
+		if !Ataq :
+			$AnimationPlayer.play("Ataque_Magico")
+			estado = 0
+			Ataq = true
+			pass
+		else:
+			if $AnimationPlayer.is_playing() :
+				estado = 1
+			else:
+				estado = 2
+			pass
+		pass
+	return estado
+	pass
+
+
+
+

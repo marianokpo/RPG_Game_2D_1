@@ -1,4 +1,4 @@
-[gd_scene load_steps=1192 format=2]
+[gd_scene load_steps=1193 format=2]
 
 [ext_resource path="res://Tileset/parts-00.png" type="Texture" id=1]
 [ext_resource path="res://Tileset/parts-01.png" type="Texture" id=2]
@@ -1196,7 +1196,13 @@
 custom_solver_bias = 0.0
 extents = Vector2( 15.8627, 16.1627 )
 
-[node name="Tileset1" type="Node2D"]
+[sub_resource type="CanvasItemMaterial" id=2]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[node name="Tileset1" type="Node2D" index="0"]
 
 position = Vector2( -1, -1 )
 
@@ -7342,7 +7348,9 @@ texture = ExtResource( 1189 )
 
 [node name="parts-1189" type="Sprite" parent="." index="1189"]
 
+material = SubResource( 2 )
 position = Vector2( 199.591, 262 )
 texture = ExtResource( 1190 )
+_sections_unfolded = [ "Material" ]
 
 

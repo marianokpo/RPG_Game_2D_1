@@ -4,7 +4,7 @@
 [ext_resource path="res://Recursos/Battle/HUD/button.png" type="Texture" id=2]
 [ext_resource path="res://Recursos/Battle/HUD/label.png" type="Texture" id=3]
 
-[node name="MenuBatalla" type="Node2D"]
+[node name="MenuBatalla" type="Node2D" index="0"]
 
 scale = Vector2( 0.3, 0.3 )
 script = ExtResource( 1 )
@@ -193,5 +193,17 @@ _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "M
 [connection signal="pressed" from="Atacar" to="." method="_on_Atacar_pressed"]
 
 [connection signal="released" from="Atacar" to="." method="_on_Atacar_released"]
+
+[connection signal="pressed" from="Magia" to="." method="_on_Magia_pressed"]
+
+[connection signal="released" from="Magia" to="." method="_on_Magia_released"]
+
+[connection signal="pressed" from="Defender" to="." method="_on_Defender_pressed"]
+
+[connection signal="released" from="Defender" to="." method="_on_Defender_released"]
+
+[connection signal="pressed" from="Escapar" to="." method="_on_Escapar_pressed"]
+
+[connection signal="released" from="Escapar" to="." method="_on_Escapar_released"]
 
 
