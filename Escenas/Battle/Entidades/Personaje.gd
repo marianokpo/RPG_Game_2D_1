@@ -1,38 +1,83 @@
 extends Node2D
 
-var vid = SingletonPersonaje.get_Vida(0)
-var mag = SingletonPersonaje.get_Magia(0)
+var index = -1
+
+var nivel = 1
+
+var nombre = ""
+
+var vida = 0
+var vidaMax = 0
+var magia = 0
+var magiaMax = 0
+var velocidad = 0
+var fuerza = 1
+var defenza = 1
+var inteligencia = 1
+var constitucion = 1
 
 var Ataq = false
 var contAtaq = 0
 
 var Org_Mov = Vector2()
 
+var iniciado = false
+
 func _ready():
-	$HUD_Battle.set_name("Mariano")
-	$HUD_Battle.set_Nivel(SingletonPersonaje.get_Nivel(0))
-	
-	$HUD_Battle.set_VidaMax(SingletonPersonaje.get_VidaMax(0))
-	$HUD_Battle.set_Vida(vid)
-	
-	$HUD_Battle.set_MagiaMax(SingletonPersonaje.get_MagiaMax(0))
-	$HUD_Battle.set_Magia(mag)
-	
-	$HUD_Battle.Inicio()
 	pass
 
 func _process(delta):
-	$HUD_Battle.set_Vida(vid)
-	$HUD_Battle.set_Magia(mag)
-	if Input.is_action_just_pressed("ui_down") :
-		if vid > 1 :
-			vid -=1
-		pass
-	if Input.is_action_just_pressed("ui_left") :
-		if mag > 0 :
-			mag -=1
+	if index >= 0:
+		if !iniciado :
+			Cargar_datos()
+		else:
+			Update()
+			$HUD_Battle.set_Vida(vida)
+			$HUD_Battle.set_Magia(magia)
+
+func set_index(var id):
+	index = id
+	pass
+
+func Cargar_datos():
+	
+	nivel = SingletonPersonaje.Personajes[index].Nivel
+
+	nombre = SingletonPersonaje.Personajes[index].Name
+	
+	vida = SingletonPersonaje.Personajes[index].Vida
+	vidaMax = SingletonPersonaje.Personajes[index].VidaMax
+	magia = SingletonPersonaje.Personajes[index].Magia
+	magiaMax = SingletonPersonaje.Personajes[index].MagiaMax
+	velocidad = SingletonPersonaje.Personajes[index].Velocidad
+	fuerza = SingletonPersonaje.Personajes[index].Fuerza
+	defenza = SingletonPersonaje.Personajes[index].Defenza
+	inteligencia = SingletonPersonaje.Personajes[index].Inteligencia
+	constitucion = SingletonPersonaje.Personajes[index].Constitucion
+	
+	$HUD_Battle.set_Nivel(nivel)
+	
+	$HUD_Battle.set_Vida(vida)
+	$HUD_Battle.set_VidaMax(vidaMax)
+	
+	$HUD_Battle.set_Magia(magia)
+	$HUD_Battle.set_MagiaMax(magiaMax)
+	
+	$HUD_Battle.Inicio()
+	
+	iniciado = true
+	pass
+
+func Update():
+	vida = SingletonPersonaje.get_Vida(index)
+	magia = SingletonPersonaje.get_Magia(index)
+	
+	if vida<=0 :
+		$AnimationPlayer.play("Derrotado")
 		pass
 	pass
+	
+	$HUD_Battle.Inicio()
 
 func Ataq_Player(var en_pos = Vector2()):
 	var estado = true

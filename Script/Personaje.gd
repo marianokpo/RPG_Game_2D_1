@@ -5,21 +5,18 @@ var Personajes = []
 func _init():
 	var pj = load("res://Script/ClassEntidad.gd").new()
 	
-	pj.Nuevo("Mariano",2,30,10,2,3,2,2,1,2,"ESPADACHIN","blue")
+	##        nombre  nivel  EXP_N vid  mag  fue  defen
+	pj.Nuevo("Mariano",1   ,10   ,10  ,1   ,6   ,2   
+	##vel  int  cont
+	,4   ,1   ,4   ,StaticClases.ESPADACHIN,"blue")
+	
+	pj.Nueva_Magia(SingletonMagias.Magias[0])
 	
 	Personajes.append(pj)
 	
-	pj = load("res://Script/ClassEntidad.gd").new()
+	for i in 4:
+		Personajes[0].Subir_Nivel()
 	
-	pj.Nuevo("Loft",2,30,10,2,3,2,2,1,2,"ESPADACHIN","arche")
-	
-	Personajes.append(pj)
-	
-	pj = load("res://Script/ClassEntidad.gd").new()
-	
-	pj.Nuevo("Glup",2,30,10,2,3,2,2,1,2,"ESPADACHIN","sheena")
-	
-	Personajes.append(pj)
 	pass
 
 func add_PJ(var pj):

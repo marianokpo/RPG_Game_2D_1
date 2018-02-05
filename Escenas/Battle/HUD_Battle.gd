@@ -10,9 +10,14 @@ var MagiaMax =0
 
 var iniciar = false
 
-
 func _ready():
 	pass
+
+func set_MaxTime(var mt):
+	maxtime = mt
+	time = (randi()%maxtime) -1 
+	pass
+
 
 func set_name(var Nom = ""):
 	$Nombre.text = Nom

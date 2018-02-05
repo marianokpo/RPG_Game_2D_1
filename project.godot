@@ -16,6 +16,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
+SingletonMagias="*res://Script/Magias.gd"
+StaticClases="*res://Script/Clases.gd"
 SingletonPersonaje="*res://Script/Personaje.gd"
 Singleton_Mapa="*res://Script/Singleton_Mapa.gd"
 SingletonEnemigo="*res://Script/ImplementadoEnemigo.gd"

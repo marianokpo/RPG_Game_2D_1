@@ -19,7 +19,7 @@ var Velocidad = 0
 var Inteligencia = 0    #AtaqueMagico
 var Constitucion = 0    #DefenzaMagica
 
-var Clase = ""        #Espacachin/Mago/ETC
+var Clase = 0        #Espacachin/Mago/ETC
 
 var NameSprite = ""       #String Sprite Correspondiente al PJ
 
@@ -36,7 +36,7 @@ func _init():
 	Velocidad = 0
 	Inteligencia = 0
 	Constitucion = 0
-	Clase = ""
+	Clase = 0
 	NameSprite = ""
 	Magias = []
 	pass
@@ -67,7 +67,30 @@ func Subir_Nivel():
 	if EXP < 0 :
 		EXP = 0
 	EXP_Nex = EXP_Nex * 2
-	_Subir_Caracteristicas()
+	#_Subir_Caracteristicas()
+	match Clase :
+		0:
+			_Subir_Caracteristicas_Espadachin()
+			continue
+		1:
+			_Subir_Caracteristicas_Luchador()
+			continue
+		3:
+			_Subir_Caracteristicas_Mago()
+			continue
+		4:
+			_Subir_Caracteristicas_Bestia()
+			continue
+		5:
+			_Subir_Caracteristicas_Angel()
+			continue
+		6:
+			_Subir_Caracteristicas_Quimera()
+			continue
+		
+		99:
+			_Subir_Caracteristicas_Boos()
+			continue
 	pass
 	
 func Subir_EXP(var n_exp):
@@ -77,7 +100,19 @@ func Subir_EXP(var n_exp):
 	pass
 	
 func Golpe_PS(var g_ps):
-	Vida -= g_ps
+	var gol = g_ps - (Defenza / 2)
+	if gol <= 0 :
+		gol = 1
+	Vida -= gol
+	if Vida < 0 :
+		Vida =0
+	pass
+
+func Golpe_PS_Magic(var g_ps):
+	var gol = g_ps - (Constitucion / 2)
+	if gol <= 0 :
+		gol = 1
+	Vida -= gol
 	if Vida < 0 :
 		Vida =0
 	pass
@@ -92,18 +127,6 @@ func Restore():
 	Vida = VidaMax
 	Magia = MagiaMax
 	
-func _Subir_Caracteristicas():
-	Fuerza += 1
-	Defenza += 1
-	Velocidad += 1
-	Inteligencia += 1
-	Constitucion += 1
-	
-	VidaMax = (Constitucion * 3)
-	Vida = VidaMax
-	MagiaMax = (Inteligencia * 3)
-	Magia = MagiaMax
-	pass
 
 func Nueva_Magia(var AM):
 	Magias.append(AM)
@@ -115,4 +138,108 @@ func ObtenerMagias():
 
 func get_Name():
 	return Name
+
+func _Subir_Caracteristicas():
+	Fuerza += 1
+	Defenza += 1
+	Velocidad += 1
+	Inteligencia += 1
+	Constitucion += 1
+	
+	VidaMax = VidaMax + (Constitucion * 3)
+	Vida = VidaMax
+	MagiaMax = MagiaMax + (Inteligencia * 3)
+	Magia = MagiaMax
+	pass
+
+func _Subir_Caracteristicas_Espadachin():
+	Fuerza += (randi()%4)+2
+	Defenza += (randi()%2)+2
+	Velocidad += (randi()%2)+1
+	Inteligencia += (randi()%1)
+	Constitucion += (randi()%2+2)
+	
+	VidaMax = VidaMax + (Constitucion * (randi()%2 + 1))
+	Vida = VidaMax
+	MagiaMax = MagiaMax + (Inteligencia * (randi()%1 +1))
+	Magia = MagiaMax
+	pass
+
+func _Subir_Caracteristicas_Luchador():
+	Fuerza += randi()%4+3
+	Defenza += randi()%2+1
+	Velocidad += randi()%3+1
+	Inteligencia += randi()%1
+	Constitucion += randi()%2+1
+	
+	VidaMax = VidaMax + (Constitucion * randi()%3)
+	Vida = VidaMax
+	MagiaMax = MagiaMax + (Inteligencia * randi()%1)
+	Magia = MagiaMax
+	pass
+
+func _Subir_Caracteristicas_Mago():
+	Fuerza += randi()%2+1
+	Defenza += randi()%2+2
+	Velocidad += randi()%2+2
+	Inteligencia += randi()%4+2
+	Constitucion += randi()%3+2
+	
+	VidaMax = VidaMax + (Constitucion * randi()%2)
+	Vida = VidaMax
+	MagiaMax = MagiaMax + (Inteligencia * randi()%4+2)
+	Magia = MagiaMax
+	pass
+
+func _Subir_Caracteristicas_Bestia():
+	Fuerza += randi()%3+1
+	Defenza += randi()%3+2
+	Velocidad += randi()%2+3
+	Inteligencia += randi()%1
+	Constitucion += randi()%1
+	
+	VidaMax = VidaMax + (Constitucion * randi()%4 +1)
+	Vida = VidaMax
+	MagiaMax = MagiaMax + (Inteligencia * randi()%2)
+	Magia = MagiaMax
+	pass
+
+func _Subir_Caracteristicas_Angel():
+	Fuerza += randi()%1+1
+	Defenza += randi()%4+2
+	Velocidad += randi()%1+2
+	Inteligencia += randi()%6+2
+	Constitucion += randi()%6+2
+	
+	VidaMax = VidaMax + (Constitucion * randi()%7)
+	Vida = VidaMax
+	MagiaMax = MagiaMax + (Inteligencia * randi()%6+2)
+	Magia = MagiaMax
+	pass
+
+func _Subir_Caracteristicas_Quimera():
+	Fuerza += randi()%7+2
+	Defenza += randi()%7+2
+	Velocidad += randi()%4+1
+	Inteligencia += randi()%1+1
+	Constitucion += randi()%1+1
+	
+	VidaMax = VidaMax + (Constitucion * randi()%2+1)
+	Vida = VidaMax
+	MagiaMax = MagiaMax + (Inteligencia * randi()%1+1)
+	Magia = MagiaMax
+	pass
+
+func _Subir_Caracteristicas_Boos():
+	Fuerza += randi()%7+1
+	Defenza += randi()%7+2
+	Velocidad += randi()%1+2
+	Inteligencia += randi()%4+2
+	Constitucion += randi()%6+2
+	
+	VidaMax = VidaMax + (Constitucion * randi()%12+1)
+	Vida = VidaMax
+	MagiaMax = MagiaMax + (Inteligencia * randi()%4+2)
+	Magia = MagiaMax
+	pass
 	
