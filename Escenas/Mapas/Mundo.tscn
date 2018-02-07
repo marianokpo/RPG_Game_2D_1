@@ -113,9 +113,9 @@ extents = Vector2( 23.1172, 29.6759 )
 [sub_resource type="RectangleShape2D" id=8]
 
 custom_solver_bias = 0.0
-extents = Vector2( 132.802, 99.8093 )
+extents = Vector2( 131.842, 99.8093 )
 
-[node name="Mundo" type="Node2D"]
+[node name="Mundo" type="Node2D" index="0"]
 
 position = Vector2( 0, -1 )
 script = SubResource( 1 )
@@ -271,7 +271,6 @@ shape = SubResource( 7 )
 
 [node name="Enemigo1" type="Area2D" parent="." index="6"]
 
-editor/display_folded = true
 position = Vector2( -265.21, 143.579 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -284,8 +283,8 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemigo1" index="0"]
 
-position = Vector2( 0, -42.649 )
-scale = Vector2( 1, 0.585164 )
+position = Vector2( -7.18407, 37.536 )
+scale = Vector2( 1.52684, 1.17207 )
 shape = SubResource( 8 )
 
 [node name="Personaje" parent="." index="7" instance=ExtResource( 3 )]

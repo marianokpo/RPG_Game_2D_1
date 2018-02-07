@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Escenas/Battle/Battle_System.gd" type="Script" id=1]
 [ext_resource path="res://Recursos/Battle/Fondo/Pasto1.jpg" type="Texture" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://Escenas/Battle/MenuBatalla.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Escenas/Battle/Cursor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Escenas/Battle/Magia.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Escenas/Battle/MenuMagia.tscn" type="PackedScene" id=8]
 
-[node name="Battle_System" type="Node2D" index="0"]
+[node name="Battle_System" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -48,7 +49,6 @@ position = Vector2( -344.911, 249.495 )
 
 [node name="MenuBatalla" parent="." index="7" instance=ExtResource( 5 )]
 
-visible = false
 position = Vector2( 495.271, 429.32 )
 
 [node name="Cursor" parent="." index="8" instance=ExtResource( 6 )]
@@ -58,5 +58,9 @@ position = Vector2( 675.535, 210.898 )
 [node name="Magia" parent="." index="9" instance=ExtResource( 7 )]
 
 position = Vector2( -340.717, 244.703 )
+
+[node name="MenuMagia" parent="." index="10" instance=ExtResource( 8 )]
+
+position = Vector2( 610.704, 431.194 )
 
 
